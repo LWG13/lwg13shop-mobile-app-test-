@@ -14,7 +14,8 @@ export default function CustomHeader({children}) {
     {children}
  </View>
   );
-}
+}  
+
 
 const styles = StyleSheet.create({
   container: {
