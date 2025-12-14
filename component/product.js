@@ -20,7 +20,7 @@ export default function ProductDetail() {
         .then((res) => res.data),
   })
   const { data, isLoading  } = useQuery({
-    queryKey: ["all"],
+    queryKey: ["all",productId],
     queryFn: () =>  
     axios
         .get("https://ecommerce-server-y5yv.onrender.com/product")

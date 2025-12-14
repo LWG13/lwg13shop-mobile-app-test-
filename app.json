@@ -11,9 +11,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-  "plugins": [
-    "expo-splash-screen"
-  ],
+    "plugins": [
+      "expo-splash-screen",
+      "expo-secure-store"
+    ],
     "sdkVersion": "52.0.0",
     "assetBundlePatterns": [
       "assets/*"
@@ -27,7 +28,6 @@
         "backgroundColor": "#ffffff"
       }
     },
-    
     "web": {
       "favicon": "./assets/favicon.png"
     }

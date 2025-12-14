@@ -2,8 +2,9 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { useState } from "react"
 import AntDesign from '@expo/vector-icons/AntDesign'
 import Feather from '@expo/vector-icons/Feather'
-
+import { useSelector } from "react-redux"
 export default function MyTabBar({ state, descriptors, navigation }) {
+  const auth = useSelector(state => state.auth)
   return (
     <View style={styles.tabContainer}>
       {state.routes.map((route, index) => {
@@ -12,7 +13,7 @@ export default function MyTabBar({ state, descriptors, navigation }) {
 
         const onPress = () => {
           
-          if(route.name === "Profile" ) navigation.navigate(route.name, { userId: "6768f2db3615369ace075e60"});
+          if(route.name === "Profile" ) navigation.navigate(route.name, { userId: auth._id});
           else {
    navigation.navigate(route.name)
           }

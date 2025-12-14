@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import AntDesign from '@expo/vector-icons/AntDesign'
 
 export default function CustomHeader({children}) {
   return (
@@ -8,7 +9,8 @@ export default function CustomHeader({children}) {
       <Text style={styles.title}>Lwg13Shop</Text>
 
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>🔍</Text>
+
+        <AntDesign name="search1" size={35} color="#ffffff" />
       </TouchableOpacity>
     </View>
     {children}

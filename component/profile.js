@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -8,17 +8,19 @@ import {
   ScrollView,
 } from "react-native";
 import SkeletonBox from "./skeletonBox";
-
+import {logoutUser} from "./ReduxToolkit/authSlice"
 import axios from "axios";
 import { useQuery } from "react-query";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector} from "react-redux";
 
 export default function Profile() {
+  const auth = useSelector(state => state.auth)
   const route = useRoute();
   const navigation = useNavigation();
   const { userId } = route.params;
   const [page, setPage] = useState(1);
-
+ const dispatch = useDispatch()
   const { data, isLoading } = useQuery({
     queryKey: ["user", userId],
     queryFn: () =>
@@ -28,7 +30,7 @@ export default function Profile() {
   });
    
   const { data: latest, isLoading: loadingLatest } = useQuery({
-    queryKey: ["latest"],
+    queryKey: ["latest", userId],
     queryFn: () =>
       axios
         .get(`https://ecommerce-server-y5yv.onrender.com/product/lastest/${userId}`)
@@ -37,7 +39,9 @@ export default function Profile() {
 
 
   const user = data;
-
+ useEffect(() => {
+   if(auth._id === null) navigation.replace("Login")
+ })
   return (
     <ScrollView style={styles.container}>
       
@@ -53,6 +57,7 @@ export default function Profile() {
       <View style={styles.profileBox}>
         <Image source={{ uri: user?.image }} style={styles.avatar} />
         <Text style={styles.username}>{user?.username}</Text>
+        {auth._id === user?._id ?  <TouchableOpacity style={{width: 110, height: 40, borderRadius: 10, backgroundColor: "white", display: "flex", textAlign: "center", justifyContent: "center", paddingLeft: 35}} onPress={() => dispatch(logoutUser())}><Text style={{color: "black"}}>Log Out</Text></TouchableOpacity> : null }
       </View>
 
       <View style={styles.tabList}>
